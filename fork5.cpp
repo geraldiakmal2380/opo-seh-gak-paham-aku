@@ -23,4 +23,28 @@ int main(void){
 
 
     }
+    else
+    {
+        cout << "The fork system call failed to create a new process" << endl; 
+        exit(1);
+    }
+
+    /*Kode ini hanya dieksekusi oleh proses parent karena child mengeksekusi dari "/bin/ls" atau keluar
+    */
+
+    cout << "I am happy, Healthy process and my pid =" << getpid() << endl;
+
+    if(child_pid == 0){
+        cout << "Kode ini tidak pernah dieksekusi" << endl;
+    }
+    else{
+        /*Kode ini hanya dieksekusi oleh proses parent*/
+        cout << "I am parent and i'm waiting my child die" << endl;
+    }
+
+    do{
+        wait_result = wait(&status);
+    }while(wait_result != child_pid);
+    
+    
 }
